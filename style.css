@@ -1,0 +1,42 @@
+body {
+    display: flex;
+}
+
+.game-container {
+    width: 800px;
+    height: 800px;
+    position: absolute;
+    left: 80px;
+}
+
+.sky {
+    position: absolute;
+    background-color: #4BF4FC;
+}
+
+.owen-blue {
+    position: absolute;
+    width: 60px;
+    height: 60px; 
+    background-color: red;
+    bottom: 0px;
+}
+
+.obstacle {
+    position: absolute;
+    width: 60px;
+    height: 60px; 
+    background-color: green;
+    bottom: 0px;
+}
+
+.ian-malcolm {
+    background-image: url(ianmalcolm.jpeg);
+    position: absolute;
+}
+
+.grid {
+    display: flex;
+    background-color: yellow;
+}
+ 

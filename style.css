@@ -5,21 +5,33 @@ body {
 .game-container {
     width: 800px;
     height: 800px;
+    top: 100px;
     position: absolute;
     left: 80px;
+    border: solid black;
 }
 
 .sky {
+    width: 800px;
+    height: 800px;
     position: absolute;
     background-color: #4BF4FC;
 }
 
-.owen-blue {
+.ground {
+    width: 800px;
+    height: 100px;
+    position: absolute;
+    background-color: #9F591E;
+}
+
+.dinorun5 {
     position: absolute;
     width: 60px;
-    height: 60px; 
-    background-color: red;
+    height: 60px;
     bottom: 0px;
+    left: 50px;
+    z-index: 5;
 }
 
 .obstacle {
@@ -30,9 +42,12 @@ body {
     bottom: 0px;
 }
 
-.ian-malcolm {
-    background-image: url(ianmalcolm.jpeg);
+.game-over-image {
+    z-index: 5;
     position: absolute;
+    left: 300px;
+    top: 500px;
+    display: none;
 }
 
 .grid {

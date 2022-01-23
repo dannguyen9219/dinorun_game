@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-const owenBlue = document.querySelector('.owen-blue')
+const owenBlue = document.querySelector('.dinorun5')
 const gameWindow = document.querySelector('.game-container')
 const alert = document.getElementById('alert')
-const body = document.querySelector('body')
-const gameOverImage = document.createElement('div')
-gameOverImage.classList.add('ian-malcolm')
+const body = document.querySelector(' body')
+const gameOverImage = document.querySelector(".game-over-image")
 
 let isJumping = false // variable used to eliminate double jumping
 let gravity = 0.9
@@ -16,13 +15,13 @@ function control(evt) {
     if (evt.keyCode === 32) {
         if (!isJumping) {
             isJumping = true
-            jump()
+            jump() 
         }
     }
 }
 document.addEventListener('keydown', control) // adding event listener for keydown 
 
-// position of player at start game
+// position of player at start game   
 let position = 0 
 
 // jump function of player
@@ -57,12 +56,16 @@ function generateObstacles() {
     let randomTime = Math.random() * 3500 // random number multiplied by 3.5s to generate obstacles
     let obstaclePosition = 1000 // starting 1000px from where player is positioned
     const obstacle = document.createElement('div') // creating new obstacle element on dom
-    if (!isGameOver)obstacle.classList.add('obstacle') // if still playing game, then add class obstacle
+    if (!isGameOver)obstacle.classList.add('obstacle') // i f still playing game, then add class obstacle
     gameWindow.appendChild(obstacle) // appending the obstacle as a child to game window
     obstacle.style.left = obstaclePosition + 'px' // adding 1000px to left side of obstacle
 
     let timerId = setInterval(function() {
-        if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) { // 60 is based on set px on CSS
+        if (obstaclePosition === 0) { // bug: does not disappear when past game window
+            clearInterval(timerId)
+            gameWindow.removeChild(obstacle)
+        }
+        if (obstaclePosition > 60 && obstaclePosition < 120 && position < 120) { // 60 is based on set px on CSS
             clearInterval(timerId)
             gameOver()
             alert.innerHTML = "You Lose"
@@ -73,19 +76,20 @@ function generateObstacles() {
                 gameWindow.removeChild(gameWindow.lastChild)
             }
         }
-        obstaclePosition -= 10 // every 20ms obstacle shrinks left spacing by 10px
+        obstaclePosition -= 8 // every 20ms obstacle shrinks left spacing by 10px
         obstacle.style.left = obstaclePosition + 'px'
     }, 20) // invoking every 20ms
     if (!isGameOver) setTimeout(generateObstacles, randomTime)
 }
 generateObstacles()
 
+
 function gameOver() {
     //clearInterval(timerId)
+    gameOverImage.style.display = "block"
     console.log("game over")
     isGameOver = true // letting variable know that game over is true
     document.removeEventListener('keydown', control) // removing event listener when game over
-    body.appendChild(gameWindow(gameOverImage)) // bug: need to add image when lose
 }
 
 

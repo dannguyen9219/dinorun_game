@@ -1,119 +1,101 @@
-document.addEventListener('DOMContentLoaded', () => {
+// DOM Variables //
 
-const owenBlue = document.querySelector('.dinorun5')
-const gameWindow = document.querySelector('.game-container')
-const alert = document.getElementById('alert')
-const body = document.querySelector(' body')
-const gameOverImage = document.querySelector(".game-over-image")
-const obstacle = document.querySelector('.treeobstacle1')
-//const startGameBtn
+const owenBlue = document.querySelector('.player');
+const obstacle = document.querySelector('.obstacle')
+const gameWindow = document.querySelector('.game-window')
+const enterGameBtn = document.getElementById('enter-game')
+const playBtn = document.getElementById('play-game')
+const instructionsModal = document.querySelector(".modal#game-instructions")
+let counter = 0;
 
-//const scoreboard = document.querySelector('.scoreboard')
+// Enter Jurassic World Button - Enter Game //
 
-let isJumping = false // variable used to eliminate double jumping
-let gravity = .9
-let isGameOver = false
-//let runningTime = 0;
+enterGameBtn.addEventListener('click', enterGameBtnClick)
 
-// function for random number
-// function getRandomNumber(min, max) {
-//     return Math.floor(Math.random() * (max - min +1)) + min
-// };
+function enterGameBtnClick(evt) {
+    console.log("Enter button clicked")
+    instructionsModal.style.display = 'block'
+    enterGameBtn.style.display = 'none'
+};
 
-// start game function
+// Start Game Function //
 
-// creating function event when space bar is pressed, then invoke jump function
-function control(evt) {
+const startGame = () => {
+    gameWindow.style.display = 'block'
+}
+
+// Play Game Button //
+
+playBtn.addEventListener('click', playBtnClick)
+
+function playBtnClick(evt) {
+    console.log("Play button clicked")
+    instructionsModal.style.display = 'none'
+    startGame()
+};
+
+// Gameover set to false // 
+
+isGameOver = false;
+
+// Space bar function to invoke jump function //
+
+function control (evt) {
     if (evt.keyCode === 32) {
-        if (!isJumping) {
-            isJumping = true
-            jump() 
-        }
+        jump()
     }
-}
-document.addEventListener('keydown', control) // adding event listener for keydown 
+};
+document.addEventListener('keydown', control)
 
-// position of player at start game   
-let position = 0 
+// Jump Function //
 
-// jump function of player
 function jump() {
-    let count = 0
-    // moving player by 10 px every 15ms until player hits 150px, so create id to set the interval function
-    let timerId = setInterval(function() {
-        // moving player down     
-        if (count === 15) { // after 15 ms, player starts falling towards ground
-            clearInterval(timerId) // clearing time event interval should stop player from jumping up
-            // method to not allow double jumping  
-            let downTimerId = setInterval(function () {
-                if (count === 0) {
-                    clearInterval(downTimerId)
-                    isJumping = false
-                }
-                position += 3 // positon of owen after landing jump
-                count -- // minus 1 each time 
-                position = position * gravity
-                owenBlue.style.bottom = position + 'px'
-            }, 20) // invoking every 20ms for the function
-        }
-        // moving player up from ground
-        position += 20 // incrementing player up by 25 px during interval
-        count ++
-        position = position * gravity // multiplying position and gravity 
-        owenBlue.style.bottom = position + 'px' // assigning player to the position of the browser
-    }, 20) // invoking every 20ms
+    if (owenBlue.classList != 'animate') {
+    owenBlue.classList.add('animate');
+    }
+    setTimeout(function() { // timer function sets timer to designated time (500ms) to execute function
+        owenBlue.classList.remove('animate') // removing the jump animation after designated time
+    }, 500) //add time interval to stop adding class every 500ms; this is to jump infinite
 }
 
-function generateObstacles() {
-    let randomTime = Math.random() * 3500 // random number multiplied by 3.5s to generate obstacles 
-    let obstaclePosition = 800 // starting 1000px from where player is positioned
-    //const obstacle = document.createElement('div') // creating new obstacle element on dom
-    if (!isGameOver)obstacle.classList.add('obstacle') // i f still playing game, then add class obstacle
-    gameWindow.appendChild(obstacle) // appending the obstacle as a child to game window
-    obstacle.style.left = obstaclePosition + 'px' // adding 1000px to left side of obstacle
+// Hit obstacle //
 
-    let timerId = setInterval(function() {
-        if (obstaclePosition === 0) { // bug: does no t disappear when past game window
-            clearInterval(timerId)
-            gameWindow.removeChild(obstacle)
-        }
-        if (obstaclePosition > 80 && obstaclePosition < 100 && position < 100) { // 60 is based on set px on CSS
-            clearInterval(timerId)
-            gameOver()
-            alert.innerHTML = "You Lose"
-            isGameOver = true
-            // removing all child divs when game is over
-            body.removeChild(body.firstChild)
-            while (gameWindow.firstChild) {
-                gameWindow.removeChild(gameWindow.lastChild)
-            }
-        }
-        obstaclePosition -= 8 // every 20ms obstacle shrinks left spacing by 8px
-        obstacle.style.left = obstaclePosition + 'px'
-    }, 20) // invoking every 20ms
-    if (!isGameOver) setTimeout(generateObstacles, randomTime)
-}
-generateObstacles()
+const hitTree = setInterval(function() { 
+    let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
+    let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
+    if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
+        obstacle.style.animation = "none";
+        alert('Game Over')
+        counter = 0;
+        obstacle.style.animation = "obstacle 1.5s infinite linear";
+    }   else {
+        counter++;
+        document.getElementById('scoreSpan').innerHTML = Math.floor(counter) // score
+    }
+}, 10);
 
-// game over function
-function gameOver() {
-    //clearInterval(timerId)
-    gameOverImage.style.display = "block"
-    console.log("game over")
-    isGameOver = true // letting variable know that game over is true
-    document.removeEventListener('keydown', control) // removing event listener when game over
-}
+/* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
+parseInt method converts string to an integer. We are needing the px of player's top position and obstacle's left
+position. Window.getComputedStyle is used to return object containing values of their CSS properties of player and 
+obstacle. The getPropertyValue identifies the CSS property and returns the value. This is to store their set px from CSS.
+If function states if left of obstacle is < 100px and > 50 px and player top is >= 240px, then game over. 
+*/
 
-// scoreboard function
+// Generate obstacle function //
 
+// function generateObstacles() {
+//     let randomTime = Math.random() + 2
+//     if (!isGameOver)obstacle.classList.add(obstacle)
+//     gameWindow.appendChild(obstacle)
 
-
-}) //Last line of code
-
-
-// Instead of game window, make the game in entire browser.
-// In HTML - create modal section for Start Game Window and Restart Game and Instructions;
-// In HTML - add buttons for Start, Instructions
-// Need to add score keeper
-// Health bar instead of instant game over?
-// Dan
+//     let timerId = setInterval(function() {
+//         if (obstaclePosition === 0) {
+//             clearInterval(timerId)
+//             gameWindow.removeChild(obstacle)
+//         }
+//         obstaclePosition -= 8
+//         obstacle.style.left = obstaclePosition + 'px'
+//     }, 20)
+//     if (!isGameOver) setTimeout(generateObstacles, randomTime)
+// }
+// generateObstacles()

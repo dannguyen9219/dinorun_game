@@ -4,34 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jurassic World: Owen & Blue Dino Run</title>
-    <link rel="stylesheet" href="style.css"></link>
-    <script src="script.js"></script>
+    <title>Jurassic World Dino Run</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-title">
-        <h1>Jurassic World: Owen & Blue Dino Run</h1>
-    </div>
-    <h2 id="alert"></h2>
 
-    <!-- Game Window -->
-    <div class="game-container">  
-        <div class="sky"></div>
-        <div class="owen-blue"></div>
-        <div class="ground"></div>
-        <img class="dinorun5" src="dinorun5.png"/>
-        <img class="treeobstacle1" src="treeobstacle1.png"/>
-        <div class="scoreboard">
-            <h3>Score: </h3>
+    <!-- Game window inside body of HTML -->
+    <div class="game-window">
+        <div id="player"></div>
+            <img class="player" src="assets/DinoSprite.png"/>
+        <div id="obstacle"></div>
+            <img class="obstacle" src="assets/TreeSprite.png"/>
+        <div id="ground"></div>
+        <div id="sky"></div>
+        <div id="volcano"></div>
+            <img class="volcano-sprite" src="assets/volcanoSprite.png"/>
+        <div id="cloud"></div>
+        <div id="pterodactyl"></div>
+        <div class="scoreCounter">
+            <p>Score: <span id="scoreSpan"></span></p>
         </div>
     </div>
-
-    <!-- Modal Windows -->
-
-    <div class='start-window' id='startWindowOpen'>
-        <button class='hide' id='start-game'></button>
+    
+    <!-- Modal for start window and instructions -->
+        <!-- Animate opening before start? Or picture of Jurassic Park? -->
+    <div class="modal" id="start-open">
+        <button class="button" id="enter-game">Enter Jurassic World</button>
     </div>
 
-    <img class="game-over-image" src="ianmalcolm.jpeg"/>
+    <!-- Modal for instructions and then Play Button -->
+    <div class="modal" id="game-instructions">
+        <h1>Rules of the Game</h1>
+        <p>You play as Owen Grady, the animal behaviorist who has been training Velociraptors at Jurassic World - a 
+            new park built on the vision of John Hammond and Dr. Henry Wu. Catastrophe strikes as Mt. Sibo has
+            erupted. Ride with your Velociraptor, Blue, as you escape the island as it wrecks havoc on the island.</p>
+        <p>Use the SPACE BAR to jump over obstacles. Do not hit any obstacles if you want to escape the island.</p>
+        <p>Play against other players to achieve the high score</p>
+        <button class="button" id="play-game">Play</button>
+    </div>
+
+    <!-- Score Counter -->
+    <div class="scoreCounter">
+        <p>Score: <span id="scoreSpan"></span></p>
+    </div>
+
 </body>
+<script src="script.js"></script>
 </html>
+

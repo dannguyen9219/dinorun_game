@@ -27,6 +27,7 @@ body {
     border-radius: 10px;
     border-width: thick;
     margin: auto;
+    background-image: url('Assets/dinorunbackground.png');
     display: none;
 }
 
@@ -63,23 +64,17 @@ body {
     100%{left: -20px}
 }
 
-#ground {
-    width: 791px;
-    height: 85px;
+.pterodactyl {
+    width: 70px;
+    height: 70px;
+    right: 800px;
     position: relative;
-    top: 230px;
-    background-color: #9f591e;
-    z-index: auto;
+    z-index: 4;
+    animation: flying 25s infinite linear;
 }
-
-#sky {
-    width: 791px;
-    height: 310px;
-    position: absolute;
-    top: 0px;
-    border-radius: 10px;
-    background-color: #4bf4fc;
-    z-index: auto;
+@keyframes flying {
+    0%{left: 0px}
+    100%{left: 750px}
 }
 
 .scoreCounter {

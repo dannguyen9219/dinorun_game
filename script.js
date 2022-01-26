@@ -3,6 +3,7 @@
 const owenBlue = document.querySelector('.player');
 const obstacle = document.querySelector('.obstacle')
 const gameWindow = document.querySelector('.game-window')
+const scoreCounter = document.querySelector('.scoreCounter')
 const enterGameBtn = document.getElementById('enter-game')
 const playBtn = document.getElementById('play-game')
 const instructionsModal = document.querySelector(".modal#game-instructions")
@@ -22,6 +23,7 @@ function enterGameBtnClick(evt) {
 
 const startGame = () => {
     gameWindow.style.display = 'block'
+    scoreCounter.style.display = 'block'
 }
 
 // Play Game Button //
@@ -54,7 +56,7 @@ function jump() {
     owenBlue.classList.add('animate');
     }
     setTimeout(function() { // timer function sets timer to designated time (500ms) to execute function
-        owenBlue.classList.remove('animate') // removing the jump animation after designated time
+    owenBlue.classList.remove('animate') // removing the jump animation after designated time
     }, 500) //add time interval to stop adding class every 500ms; this is to jump infinite
 }
 
@@ -66,6 +68,7 @@ const hitTree = setInterval(function() {
     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
         obstacle.style.animation = "none";
         alert('Game Over')
+        //gameOver()
         counter = 0;
         obstacle.style.animation = "obstacle 1.5s infinite linear";
     }   else {
@@ -73,6 +76,10 @@ const hitTree = setInterval(function() {
         document.getElementById('scoreSpan').innerHTML = Math.floor(counter) // score
     }
 }, 10);
+
+// Game over function //
+
+
 
 /* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
 parseInt method converts string to an integer. We are needing the px of player's top position and obstacle's left
@@ -99,3 +106,6 @@ If function states if left of obstacle is < 100px and > 50 px and player top is 
 //     if (!isGameOver) setTimeout(generateObstacles, randomTime)
 // }
 // generateObstacles()
+
+
+// 1/25/2022 2017 Currently working on the game window. Commented out enter-game.css, game-window.css.display, enter game play game start game function

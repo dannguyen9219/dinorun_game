@@ -1,38 +1,48 @@
 // DOM Variables //
 
 const owenBlue = document.querySelector('.player');
-const obstacle = document.querySelector('.obstacle')
-const gameWindow = document.querySelector('.game-window')
-const scoreCounter = document.querySelector('.scoreCounter')
-const enterGameBtn = document.getElementById('enter-game')
-const playBtn = document.getElementById('play-game')
-const instructionsModal = document.querySelector(".modal#game-instructions")
+const obstacle = document.querySelector('.obstacle');
+const gameWindow = document.querySelector('.game-window');
+const scoreCounter = document.querySelector('.scoreCounter');
+const enterGameBtn = document.getElementById('enter-game');
+const playBtn = document.getElementById('play-game');
+const restartBtn = document.getElementById('restart-button');
+const exitBtn = document.getElementById('exit-button');
+const instructionsModal = document.querySelector(".modal#game-instructions");
+const gameoverModal = document.querySelector('.modal#gameover-window');
 let counter = 0;
 
-// Enter Jurassic World Button - Enter Game //
+// Event Listeners //
 
-enterGameBtn.addEventListener('click', enterGameBtnClick)
+document.addEventListener('keydown', control);
+
+enterGameBtn.addEventListener('click', enterGameBtnClick);
+
+playBtn.addEventListener('click', playBtnClick);
+
+restartBtn.addEventListener('click', playBtnClick);
+
+// Enter Game Function //
 
 function enterGameBtnClick(evt) {
-    console.log("Enter button clicked")
-    instructionsModal.style.display = 'block'
-    enterGameBtn.style.display = 'none'
+    console.log("Enter button clicked");
+    instructionsModal.style.display = 'block';
+    enterGameBtn.style.display = 'none';
 };
 
 // Start Game Function //
 
 const startGame = () => {
-    gameWindow.style.display = 'block'
-    scoreCounter.style.display = 'block'
+    gameWindow.style.display = 'block';
+    scoreCounter.style.display = 'block';
 }
 
 // Play Game Button //
 
-playBtn.addEventListener('click', playBtnClick)
-
 function playBtnClick(evt) {
-    console.log("Play button clicked")
-    instructionsModal.style.display = 'none'
+    console.log("Play button clicked");
+    instructionsModal.style.display = 'none';
+    gameoverModal.style.display = 'none';
     startGame()
 };
 
@@ -47,7 +57,6 @@ function control (evt) {
         jump()
     }
 };
-document.addEventListener('keydown', control)
 
 // Jump Function //
 
@@ -66,8 +75,8 @@ const hitTree = setInterval(function() {
     let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
-        obstacle.style.animation = "none";
-        alert('Game Over')
+        gameWindow.style.display = "none";
+        gameoverModal.style.display = "block";
         //gameOver()
         counter = 0;
         obstacle.style.animation = "obstacle 1.5s infinite linear";

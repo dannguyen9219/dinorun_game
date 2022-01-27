@@ -22,7 +22,7 @@ body {
     width: 800px;
     height: 400px;
     position: relative;
-    top: 50px;
+    margin: 0 auto;
     border: 2px solid black;
     border-radius: 10px;
     border-width: thick;
@@ -90,6 +90,7 @@ body {
 #enter-game {
 	display: block;
     position: relative;
+    font-family: 'Righteous';
     top: 400px;
     margin: auto;
 	padding: 10px 20px;
@@ -100,10 +101,6 @@ body {
 	color: black;
     border-width: medium;
     border-radius: 10px;
-}
-
-div.modal#start-open {
-    /* visibility: hidden; */
 }
 
 div.modal#game-instructions {
@@ -123,9 +120,18 @@ div.modal#game-instructions {
     box-shadow: 5px 2.5px 10px 0px rgb(38, 36, 36);
 }
 
+.gameoverBtn {
+	font-size: medium;
+    background-color: rgb(223, 217, 217);
+    padding: 10px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    font-family: 'Righteous';
+}
+
 div.modal#gameover-window {
     display: none;
-    height: 60vh;
+    height: 30vh;
     width: 60vw;
     text-align: center;
     line-height: 4;
@@ -137,6 +143,22 @@ div.modal#gameover-window {
     margin: 0 auto;
     border-style: solid;
     border-color: black;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 5px 2.5px 10px 0px rgb(38, 36, 36);
+}
+
+div.modal#exit-window {
+    display: none;
+    color: black;
+    height: 30vh;
+    width: 60vw;
+    font-family: 'Righteous';
+    text-align: center;
+    line-height: 2;
+    margin: 0 auto;
+    border-color: black;
+    border-style: solid;
     border-radius: 10px;
     padding: 30px;
     box-shadow: 5px 2.5px 10px 0px rgb(38, 36, 36);

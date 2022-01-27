@@ -8,9 +8,11 @@ const enterGameBtn = document.getElementById('enter-game');
 const playBtn = document.getElementById('play-game');
 const restartBtn = document.getElementById('restart-button');
 const exitBtn = document.getElementById('exit-button');
+const returnTitleBtn = document.getElementById('title-screen-button');
 const instructionsModal = document.querySelector(".modal#game-instructions");
 const gameoverModal = document.querySelector('.modal#gameover-window');
-let counter = 0;
+const exitWindowModal = document.querySelector('.modal#exit-window');
+
 
 // Event Listeners //
 
@@ -21,6 +23,21 @@ enterGameBtn.addEventListener('click', enterGameBtnClick);
 playBtn.addEventListener('click', playBtnClick);
 
 restartBtn.addEventListener('click', playBtnClick);
+
+exitBtn.addEventListener('click', exitBtnClick);
+
+returnTitleBtn.addEventListener('click', returnTitleBtnClick);
+
+// Scoring Function //
+
+let counter = 0;
+
+let score = Math.floor(counter);
+console.log(score)
+
+// function score() {
+//     Math.floor(counter)
+// };
 
 // Enter Game Function //
 
@@ -35,7 +52,7 @@ function enterGameBtnClick(evt) {
 const startGame = () => {
     gameWindow.style.display = 'block';
     scoreCounter.style.display = 'block';
-}
+};
 
 // Play Game Button //
 
@@ -43,8 +60,23 @@ function playBtnClick(evt) {
     console.log("Play button clicked");
     instructionsModal.style.display = 'none';
     gameoverModal.style.display = 'none';
+    counter = 0;
     startGame()
 };
+
+// Exit Game Function //
+
+function exitBtnClick(evt) {
+    console.log("Exit game button clicked");
+    gameoverModal.style.display = "none";
+    exitWindowModal.style.display = "block";
+};
+
+function returnTitleBtnClick(evt) {
+    console.log("Return title button clicked");
+    exitWindowModal.style.display = 'none';
+    enterGameBtn.style.display = 'block'
+}
 
 // Gameover set to false // 
 
@@ -54,8 +86,8 @@ isGameOver = false;
 
 function control (evt) {
     if (evt.keyCode === 32) {
-        jump()
-    }
+        jump();
+    };
 };
 
 // Jump Function //
@@ -63,11 +95,11 @@ function control (evt) {
 function jump() {
     if (owenBlue.classList != 'animate') {
     owenBlue.classList.add('animate');
-    }
+    };
     setTimeout(function() { // timer function sets timer to designated time (500ms) to execute function
     owenBlue.classList.remove('animate') // removing the jump animation after designated time
-    }, 500) //add time interval to stop adding class every 500ms; this is to jump infinite
-}
+    }, 500); //add time interval to stop adding class every 500ms; this is to jump infinite
+};
 
 // Hit obstacle //
 
@@ -77,18 +109,18 @@ const hitTree = setInterval(function() {
     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
         gameWindow.style.display = "none";
         gameoverModal.style.display = "block";
+        document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
         //gameOver()
-        counter = 0;
+        //counter = 0;
         obstacle.style.animation = "obstacle 1.5s infinite linear";
     }   else {
         counter++;
-        document.getElementById('scoreSpan').innerHTML = Math.floor(counter) // score
+        document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
     }
 }, 10);
 
-// Game over function //
 
-
+//Local storage //
 
 /* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
 parseInt method converts string to an integer. We are needing the px of player's top position and obstacle's left
@@ -96,6 +128,9 @@ position. Window.getComputedStyle is used to return object containing values of 
 obstacle. The getPropertyValue identifies the CSS property and returns the value. This is to store their set px from CSS.
 If function states if left of obstacle is < 100px and > 50 px and player top is >= 240px, then game over. 
 */
+
+// Game Over Function //
+
 
 // Generate obstacle function //
 

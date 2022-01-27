@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jurassic World Dino Run</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400&family=Righteous&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -39,13 +42,27 @@
         <p>Play against other players to achieve the high score</p>
         <button class="button" id="play-game">Play Game</button>
     </div>
-
+    <!-- Modal for gameover window -->
     <div class="modal" id="gameover-window">
         <h2>You hit a tree!</h2>
         <p>Owen and Blue has failed to get off the island. Try again.</p>
-        <p>Your score: </p>
-        <button class="restart-button" id="restart-button">Restart Game</button>
-        <button class="exit-button" id="exit-button">Exit Game</button>
+        <p>Your Score: <span id="scoreTextSpan"></span></p>
+        <button class="gameoverBtn" id="restart-button">Restart Game</button>
+        <button class="gameoverBtn" id="exit-button">Exit Game</button>
+    </div>
+
+    <!-- Modal for Exit Game with Score -->
+    <div class="modal" id="exit-window">
+        <h2>Leaving Jurassic World</h2>
+
+        <div class="highScoreTable" id="high-score-table">
+            <h3>Top 3 Scores</h3>
+            <p>1st Place: <span id="first-place"></span></p>
+            <p>2nd Place: <span id="second-place"></span></p>
+            <p>3rd Place: <span id="third-place"></span></p>
+            <button class="titleScreen" id="title-screen-button">Return to Title Screen</button>
+        </div>
+
     </div>
 
     <!-- Score Counter -->

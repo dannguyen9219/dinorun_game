@@ -103,21 +103,21 @@ function jump() {
 
 // Hit obstacle //
 
-const hitTree = setInterval(function() { 
-    let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
-    let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
-    if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
-        gameWindow.style.display = "none";
-        gameoverModal.style.display = "block";
-        document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
-        //gameOver()
-        //counter = 0;
-        obstacle.style.animation = "obstacle 1.5s infinite linear";
-    }   else {
-        counter++;
-        document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
-    }
-}, 10);
+// const hitTree = setInterval(function() { 
+//     let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
+//     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
+//     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
+//         gameWindow.style.display = "none";
+//         gameoverModal.style.display = "block";
+//         document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
+//         //gameOver()
+//         //counter = 0;
+//         obstacle.style.animation = "obstacle 1.5s infinite linear";
+//     }   else {
+//         counter++;
+//         document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
+//     }
+// }, 10);
 
 
 //Local storage //

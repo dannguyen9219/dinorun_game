@@ -152,7 +152,7 @@ div.modal#game-instructions {
 
 div.modal#gameover-window {
     display: block;
-    height: 30vh;
+    height: 60vh;
     width: 60vw;
     text-align: center;
     line-height: 4;
@@ -172,7 +172,7 @@ div.modal#gameover-window {
 div.modal#exit-window {
     display: none;
     color: black;
-    height: 30vh;
+    height: 60vh;
     width: 60vw;
     font-family: 'Righteous';
     text-align: center;

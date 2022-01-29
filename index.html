@@ -49,6 +49,15 @@
         <h2>You hit a tree!</h2>
         <p>Owen and Blue has failed to get off the island. Try again.</p>
         <p>Your Score: <span id="scoreTextSpan"></span></p>
+        <fieldset>
+            <legend>Insert Name</legend>
+            <input id="inputKey" type="text" placeholder="Your Name...">
+            <button class="submitScoreBtn" id="submit-score-button">Submit Score</button>
+        </fieldset>
+        <fieldset>
+            <legend>Local Storage</legend>
+            <div id="local-storage-output"></div>
+        </fieldset>
         <button class="gameoverBtn" id="restart-button">Restart Game</button>
         <button class="gameoverBtn" id="exit-button">Exit Game</button>
     </div>
@@ -64,7 +73,6 @@
             <p>3rd Place: <span id="third-place"></span></p>
             <button class="titleScreen" id="title-screen-button">Return to Title Screen</button>
         </div>
-
     </div>
 
     <!-- Score Counter -->

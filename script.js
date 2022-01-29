@@ -9,6 +9,9 @@ const playBtn = document.getElementById('play-game');
 const restartBtn = document.getElementById('restart-button');
 const exitBtn = document.getElementById('exit-button');
 const returnTitleBtn = document.getElementById('title-screen-button');
+const inputKey = document.getElementById('inputKey');
+const submitBtn = document.getElementById('submit-score-button');
+const lsOutput = document.getElementById('local-storage-output')
 const instructionsModal = document.querySelector(".modal#game-instructions");
 const gameoverModal = document.querySelector('.modal#gameover-window');
 const exitWindowModal = document.querySelector('.modal#exit-window');
@@ -27,6 +30,25 @@ restartBtn.addEventListener('click', playBtnClick);
 exitBtn.addEventListener('click', exitBtnClick);
 
 returnTitleBtn.addEventListener('click', returnTitleBtnClick);
+
+submitBtn.addEventListener('click', submitScoreBtn);
+
+// Submitting Score Function //
+
+function submitScoreBtn(evt) {
+    console.log("Submit score button clicked")
+    const key = inputKey.value;
+
+    if (key) {
+        localStorage.setItem(key, Math.floor(counter));
+    }
+};
+
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    lsOutput.innerHTML += `${key}: ${value}<br />`
+}
 
 // Scoring Function //
 
@@ -103,24 +125,21 @@ function jump() {
 
 // Hit obstacle //
 
-// const hitTree = setInterval(function() { 
-//     let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
-//     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
-//     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
-//         gameWindow.style.display = "none";
-//         gameoverModal.style.display = "block";
-//         document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
-//         //gameOver()
-//         //counter = 0;
-//         obstacle.style.animation = "obstacle 1.5s infinite linear";
-//     }   else {
-//         counter++;
-//         document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
-//     }
-// }, 10);
-
-
-//Local storage //
+const hitTree = setInterval(function() { 
+    let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
+    let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
+    if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
+        gameWindow.style.display = "none";
+        gameoverModal.style.display = "block";
+        document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
+        //gameOver()
+        //counter = 0;
+        obstacle.style.animation = "obstacle 1.5s infinite linear";
+    }   else {
+        counter++;
+        document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
+    }
+}, 10);
 
 /* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
 parseInt method converts string to an integer. We are needing the px of player's top position and obstacle's left
@@ -128,6 +147,11 @@ position. Window.getComputedStyle is used to return object containing values of 
 obstacle. The getPropertyValue identifies the CSS property and returns the value. This is to store their set px from CSS.
 If function states if left of obstacle is < 100px and > 50 px and player top is >= 240px, then game over. 
 */
+
+//Local storage //
+
+
+
 
 // Game Over Function //
 

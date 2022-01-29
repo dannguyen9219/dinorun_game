@@ -108,7 +108,7 @@ body {
 }
 
 #enter-game {
-	display: none;
+	display: block;
     position: relative;
     font-family: JurassicParkFont;
     top: 400px;
@@ -151,7 +151,7 @@ div.modal#game-instructions {
 }
 
 div.modal#gameover-window {
-    display: block;
+    display: none;
     height: 60vh;
     width: 60vw;
     text-align: center;

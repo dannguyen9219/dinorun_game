@@ -31,31 +31,46 @@ exitBtn.addEventListener('click', exitBtnClick);
 
 returnTitleBtn.addEventListener('click', returnTitleBtnClick);
 
-submitBtn.addEventListener('click', submitScoreBtn);
+submitBtn.addEventListener('click',() => submitScoreBtn());
 
 // Submitting Score Function //
 
 function submitScoreBtn(evt) {
     console.log("Submit score button clicked")
     const key = inputKey.value;
-
     if (key) {
-        localStorage.setItem(key, Math.floor(counter));
+        localStorage.setItem(key, Math.floor(counter))
     }
-};
+    // for (let i = 0; i < localStorage.length; i++) {
+    //     const localKey = localStorage.key(i);
+    //     if (!localKey.includes(key)) {
+    //         localStorage.setItem(key, Math.floor(counter));
+    //     }
+    // }
 
-for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const value = localStorage.getItem(key);
-    lsOutput.innerHTML += `${key}: ${value}<br />`
-}
+    gameoverModal.style.display = 'none';
+    exitWindowModal.style.display = 'block';
+
+    console.log("Before: ", localStorage)
+    lsOutput.innerHTML = "";
+    
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        console.log(i)
+            const value = localStorage.getItem(key);
+            const scoreDiv = document.createElement("div")
+            scoreDiv.innerHTML = `${key}: ${value}`
+            lsOutput.appendChild(scoreDiv)
+    };
+    console.log("After: ", localStorage)
+    inputKey.value = "";
+};
 
 // Scoring Function //
 
 let counter = 0;
 
 let score = Math.floor(counter);
-console.log(score)
 
 // function score() {
 //     Math.floor(counter)
@@ -133,7 +148,7 @@ const hitTree = setInterval(function() {
         gameoverModal.style.display = "block";
         document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
         //gameOver()
-        //counter = 0;
+        counter = 0;
         obstacle.style.animation = "obstacle 1.5s infinite linear";
     }   else {
         counter++;
@@ -172,8 +187,4 @@ If function states if left of obstacle is < 100px and > 50 px and player top is 
 //         obstacle.style.left = obstaclePosition + 'px'
 //     }, 20)
 //     if (!isGameOver) setTimeout(generateObstacles, randomTime)
-// }
-// generateObstacles()
-
-
-// 1/25/2022 2017 Currently working on the game window. Commented out enter-game.css, game-window.css.display, enter game play game start game function
+//

@@ -15,3 +15,9 @@ Rankings are updated every game and displays Top 5 players with the highest scor
 
 Version 1.01
 Created player entity; Created obstacles; Created jump function; Created end game function;
+
+Version 1.10
+Added localStorage method to save Player's name and score, however, it is on the gameOverWindow instead of exitWindow.
+
+Version 1.11
+Score window now has elements appended for name of scorers and does not duplicate

@@ -21,3 +21,6 @@ Added localStorage method to save Player's name and score, however, it is on the
 
 Version 1.11
 Score window now has elements appended for name of scorers and does not duplicate
+
+Version 1.12
+Score now does not keep going when saving your score on locale storage. Bug when restarting the game over - score stays the same as last score, and obstacle can pass through player

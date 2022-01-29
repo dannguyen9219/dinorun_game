@@ -33,49 +33,6 @@ returnTitleBtn.addEventListener('click', returnTitleBtnClick);
 
 submitBtn.addEventListener('click',() => submitScoreBtn());
 
-// Submitting Score Function //
-
-function submitScoreBtn(evt) {
-    console.log("Submit score button clicked")
-    const key = inputKey.value;
-    if (key) {
-        localStorage.setItem(key, Math.floor(counter))
-    }
-    // for (let i = 0; i < localStorage.length; i++) {
-    //     const localKey = localStorage.key(i);
-    //     if (!localKey.includes(key)) {
-    //         localStorage.setItem(key, Math.floor(counter));
-    //     }
-    // }
-
-    gameoverModal.style.display = 'none';
-    exitWindowModal.style.display = 'block';
-
-    console.log("Before: ", localStorage)
-    lsOutput.innerHTML = "";
-    
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        console.log(i)
-            const value = localStorage.getItem(key);
-            const scoreDiv = document.createElement("div")
-            scoreDiv.innerHTML = `${key}: ${value}`
-            lsOutput.appendChild(scoreDiv)
-    };
-    console.log("After: ", localStorage)
-    inputKey.value = "";
-};
-
-// Scoring Function //
-
-let counter = 0;
-
-let score = Math.floor(counter);
-
-// function score() {
-//     Math.floor(counter)
-// };
-
 // Enter Game Function //
 
 function enterGameBtnClick(evt) {
@@ -84,21 +41,22 @@ function enterGameBtnClick(evt) {
     enterGameBtn.style.display = 'none';
 };
 
-// Start Game Function //
-
-const startGame = () => {
-    gameWindow.style.display = 'block';
-    scoreCounter.style.display = 'block';
-};
-
 // Play Game Button //
 
 function playBtnClick(evt) {
     console.log("Play button clicked");
     instructionsModal.style.display = 'none';
     gameoverModal.style.display = 'none';
-    counter = 0;
     startGame()
+};
+// Start Game Function //
+
+let counter = 0;
+
+const startGame = () => {
+    gameWindow.style.display = 'block';
+    scoreCounter.style.display = 'block';
+    counter = 0;
 };
 
 // Exit Game Function //
@@ -110,10 +68,11 @@ function exitBtnClick(evt) {
 };
 
 function returnTitleBtnClick(evt) {
+    counter = 0; // not working, want the game to start new
     console.log("Return title button clicked");
     exitWindowModal.style.display = 'none';
     enterGameBtn.style.display = 'block'
-}
+};
 
 // Gameover set to false // 
 
@@ -144,17 +103,47 @@ const hitTree = setInterval(function() {
     let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
-        gameWindow.style.display = "none";
-        gameoverModal.style.display = "block";
+        gameOver()
+        // gameWindow.style.display = "none";
+        // gameoverModal.style.display = "block";
         document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
-        //gameOver()
-        counter = 0;
+        clearInterval(hitTree)
+        //counter = 0; // this starts the counter over, but does not save current score
         obstacle.style.animation = "obstacle 1.5s infinite linear";
     }   else {
         counter++;
         document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
     }
 }, 10);
+
+// Submitting your Score Function //
+
+function submitScoreBtn(evt) {
+    console.log("Submit score button clicked")
+    const key = inputKey.value;
+    if (key) {
+        localStorage.setItem(key, Math.floor(counter))
+    }
+
+    gameoverModal.style.display = 'none';
+    exitWindowModal.style.display = 'block';
+
+    console.log("Before: ", localStorage)
+    lsOutput.innerHTML = "";
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        console.log(i)
+            const value = localStorage.getItem(key);
+            const scoreDiv = document.createElement("div")
+            scoreDiv.innerHTML = `${key}: ${value}`
+            lsOutput.appendChild(scoreDiv)
+    };
+    console.log("After: ", localStorage)
+    inputKey.value = "";
+
+    clearInterval(hitTree)
+};
 
 /* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
 parseInt method converts string to an integer. We are needing the px of player's top position and obstacle's left
@@ -163,13 +152,17 @@ obstacle. The getPropertyValue identifies the CSS property and returns the value
 If function states if left of obstacle is < 100px and > 50 px and player top is >= 240px, then game over. 
 */
 
-//Local storage //
-
-
-
-
 // Game Over Function //
 
+const gameOver = () => {
+    // counter = 0 // this will make the score equal 0
+    gameWindow.style.display = 'none';
+    gameoverModal.style.display = 'block';
+};
+
+// function gameOver (evt) {
+//     clearInterval(hitTree)
+// };
 
 // Generate obstacle function //
 

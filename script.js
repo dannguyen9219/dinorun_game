@@ -1,5 +1,6 @@
 // DOM Variables //
 
+const gameLogo = document.getElementById('game-logo')
 const owenBlue = document.querySelector('.player');
 const obstacle = document.querySelector('.obstacle');
 const gameWindow = document.querySelector('.game-window');
@@ -40,6 +41,7 @@ submitBtn.addEventListener('click',() => submitScoreBtn());
 function enterGameBtnClick(evt) {
     console.log("Enter button clicked");
     instructionsModal.style.display = 'block';
+    gameLogo.style.display = 'none';
     enterGameBtn.style.display = 'none';
     themeSong.play();
 };

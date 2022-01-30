@@ -30,3 +30,6 @@ Game now reloads once you restart game or return to title screen - allowing the 
 
 Version 1.14
 Added game sounds and music
+
+Version 1.15
+CSS updates and added logo

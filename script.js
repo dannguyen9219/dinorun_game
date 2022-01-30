@@ -25,7 +25,7 @@ enterGameBtn.addEventListener('click', enterGameBtnClick);
 
 playBtn.addEventListener('click', playBtnClick);
 
-restartBtn.addEventListener('click', playBtnClick);
+restartBtn.addEventListener('click', restartBtnClick);
 
 exitBtn.addEventListener('click', exitBtnClick);
 
@@ -33,7 +33,7 @@ returnTitleBtn.addEventListener('click', returnTitleBtnClick);
 
 submitBtn.addEventListener('click',() => submitScoreBtn());
 
-// Enter Game Function //
+// Enter Game Button Function //
 
 function enterGameBtnClick(evt) {
     console.log("Enter button clicked");
@@ -41,7 +41,7 @@ function enterGameBtnClick(evt) {
     enterGameBtn.style.display = 'none';
 };
 
-// Play Game Button //
+// Play Game Button Function //
 
 function playBtnClick(evt) {
     console.log("Play button clicked");
@@ -49,7 +49,7 @@ function playBtnClick(evt) {
     gameoverModal.style.display = 'none';
     startGame()
 };
-// Start Game Function //
+// Start Game Button Function //
 
 let counter = 0;
 
@@ -59,7 +59,7 @@ const startGame = () => {
     counter = 0;
 };
 
-// Exit Game Function //
+// Exit Game Button Function //
 
 function exitBtnClick(evt) {
     console.log("Exit game button clicked");
@@ -67,11 +67,21 @@ function exitBtnClick(evt) {
     exitWindowModal.style.display = "block";
 };
 
+// Restart Game Button Function //
+
+function restartBtnClick(evt) {
+    console.log("Restart game button clicked");
+    location.reload();
+};
+
+// Return Title Button Function //
+
 function returnTitleBtnClick(evt) {
     counter = 0; // not working, want the game to start new
     console.log("Return title button clicked");
     exitWindowModal.style.display = 'none';
-    enterGameBtn.style.display = 'block'
+    // enterGameBtn.style.display = 'block'
+    location.reload(); // works
 };
 
 // Gameover set to false // 
@@ -104,11 +114,7 @@ const hitTree = setInterval(function() {
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
         gameOver()
-        // gameWindow.style.display = "none";
-        // gameoverModal.style.display = "block";
         document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
-        clearInterval(hitTree)
-        //counter = 0; // this starts the counter over, but does not save current score
         obstacle.style.animation = "obstacle 1.5s infinite linear";
     }   else {
         counter++;
@@ -122,27 +128,26 @@ function submitScoreBtn(evt) {
     console.log("Submit score button clicked")
     const key = inputKey.value;
     if (key) {
-        localStorage.setItem(key, Math.floor(counter))
+        localStorage.setItem(key, Math.floor(counter));
+        counter = 0;
     }
 
     gameoverModal.style.display = 'none';
     exitWindowModal.style.display = 'block';
 
-    console.log("Before: ", localStorage)
+    console.log("Before: ", localStorage);
     lsOutput.innerHTML = "";
 
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         console.log(i)
             const value = localStorage.getItem(key);
-            const scoreDiv = document.createElement("div")
-            scoreDiv.innerHTML = `${key}: ${value}`
-            lsOutput.appendChild(scoreDiv)
+            const scoreDiv = document.createElement("div");
+            scoreDiv.innerHTML = `${key}: ${value}`;
+            lsOutput.appendChild(scoreDiv);
     };
-    console.log("After: ", localStorage)
+    console.log("After: ", localStorage);
     inputKey.value = "";
-
-    clearInterval(hitTree)
 };
 
 /* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
@@ -155,29 +160,7 @@ If function states if left of obstacle is < 100px and > 50 px and player top is 
 // Game Over Function //
 
 const gameOver = () => {
-    // counter = 0 // this will make the score equal 0
     gameWindow.style.display = 'none';
     gameoverModal.style.display = 'block';
+    clearInterval(hitTree)
 };
-
-// function gameOver (evt) {
-//     clearInterval(hitTree)
-// };
-
-// Generate obstacle function //
-
-// function generateObstacles() {
-//     let randomTime = Math.random() + 2
-//     if (!isGameOver)obstacle.classList.add(obstacle)
-//     gameWindow.appendChild(obstacle)
-
-//     let timerId = setInterval(function() {
-//         if (obstaclePosition === 0) {
-//             clearInterval(timerId)
-//             gameWindow.removeChild(obstacle)
-//         }
-//         obstaclePosition -= 8
-//         obstacle.style.left = obstaclePosition + 'px'
-//     }, 20)
-//     if (!isGameOver) setTimeout(generateObstacles, randomTime)
-//

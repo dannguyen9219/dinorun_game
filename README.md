@@ -24,3 +24,6 @@ Score window now has elements appended for name of scorers and does not duplicat
 
 Version 1.12
 Score now does not keep going when saving your score on locale storage. Bug when restarting the game over - score stays the same as last score, and obstacle can pass through player
+
+Version 1.13
+Game now reloads once you restart game or return to title screen - allowing the interval to start again. 

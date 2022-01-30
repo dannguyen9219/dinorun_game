@@ -184,3 +184,7 @@ div.modal#exit-window {
     padding: 30px;
     box-shadow: 5px 2.5px 10px 0px rgb(38, 36, 36);
 }
+
+#opening-theme {
+    display: none;
+}

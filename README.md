@@ -27,3 +27,6 @@ Score now does not keep going when saving your score on locale storage. Bug when
 
 Version 1.13
 Game now reloads once you restart game or return to title screen - allowing the interval to start again. 
+
+Version 1.14
+Added game sounds and music

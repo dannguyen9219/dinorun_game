@@ -15,7 +15,9 @@ const lsOutput = document.getElementById('local-storage-output')
 const instructionsModal = document.querySelector(".modal#game-instructions");
 const gameoverModal = document.querySelector('.modal#gameover-window');
 const exitWindowModal = document.querySelector('.modal#exit-window');
-
+const themeSong = document.getElementById('opening-theme')
+const jumpAudio = document.getElementById('jump-sound')
+const treeAudio = document.getElementById('tree-sound')
 
 // Event Listeners //
 
@@ -39,6 +41,7 @@ function enterGameBtnClick(evt) {
     console.log("Enter button clicked");
     instructionsModal.style.display = 'block';
     enterGameBtn.style.display = 'none';
+    themeSong.play();
 };
 
 // Play Game Button Function //
@@ -48,6 +51,7 @@ function playBtnClick(evt) {
     instructionsModal.style.display = 'none';
     gameoverModal.style.display = 'none';
     startGame()
+    themeSong.pause();
 };
 // Start Game Button Function //
 
@@ -93,6 +97,7 @@ isGameOver = false;
 function control (evt) {
     if (evt.keyCode === 32) {
         jump();
+        jumpAudio.play();
     };
 };
 
@@ -113,6 +118,7 @@ const hitTree = setInterval(function() {
     let owenBlueTop = parseInt(window.getComputedStyle(owenBlue).getPropertyValue('top'));
     let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
     if(obstacleLeft < 100 && obstacleLeft > 50 && owenBlueTop >= 240) {
+        treeAudio.play();
         gameOver()
         document.getElementById('scoreTextSpan').innerHTML = Math.floor(counter);
         obstacle.style.animation = "obstacle 1.5s infinite linear";

@@ -10,7 +10,7 @@ Use the space bar to jump over obstacles and earn a high score. If Owen & Blue h
 
 Play against other players to see who will be No. 1 on the rankings.
 
-Rankings are updated every game and displays Top 5 players with the highest scores.
+Rankings are updated every game and displays top players of the day.
 
 
 Version 1.01
@@ -33,3 +33,9 @@ Added game sounds and music
 
 Version 1.15
 CSS updates and added logo
+
+Version 1.16
+Cleaned up code
+
+Creator Notes: 
+a) Tried to have score table list only top scorers but the use of .JSON files were recommended... couldn't figure out the high scoring table in time.

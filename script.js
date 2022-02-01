@@ -34,7 +34,7 @@ exitBtn.addEventListener('click', exitBtnClick);
 
 returnTitleBtn.addEventListener('click', returnTitleBtnClick);
 
-submitBtn.addEventListener('click',() => submitScoreBtn());
+submitBtn.addEventListener('click', submitScoreBtn);
 
 // Enter Game Button Function //
 
@@ -83,16 +83,10 @@ function restartBtnClick(evt) {
 // Return Title Button Function //
 
 function returnTitleBtnClick(evt) {
-    counter = 0; // not working, want the game to start new
+    counter = 0;
     console.log("Return title button clicked");
-    exitWindowModal.style.display = 'none';
-    // enterGameBtn.style.display = 'block'
-    location.reload(); // works
+    location.reload();
 };
-
-// Gameover set to false // 
-
-isGameOver = false;
 
 // Space bar function to invoke jump function //
 
@@ -111,7 +105,7 @@ function jump() {
     };
     setTimeout(function() { // timer function sets timer to designated time (500ms) to execute function
     owenBlue.classList.remove('animate') // removing the jump animation after designated time
-    }, 500); //add time interval to stop adding class every 500ms; this is to jump infinite
+    }, 500); //add time interval to stop adding class every 500ms; this is to jump multiple times
 };
 
 // Hit obstacle //
@@ -126,7 +120,7 @@ const hitTree = setInterval(function() {
         obstacle.style.animation = "obstacle 1.5s infinite linear";
     }   else {
         counter++;
-        document.getElementById('scoreSpan').innerHTML = Math.floor(counter); // score
+        document.getElementById('scoreSpan').innerHTML = Math.floor(counter);
     }
 }, 10);
 
@@ -138,7 +132,7 @@ function submitScoreBtn(evt) {
     if (key) {
         localStorage.setItem(key, Math.floor(counter));
         counter = 0;
-    }
+    };
 
     gameoverModal.style.display = 'none';
     exitWindowModal.style.display = 'block';
@@ -157,13 +151,6 @@ function submitScoreBtn(evt) {
     console.log("After: ", localStorage);
     inputKey.value = "";
 };
-
-/* setInterval calls this function every 10ms; this is to check if obstacle is in same position as player every 10ms.
-parseInt method converts string to an integer. We are needing the px of player's top position and obstacle's left
-position. Window.getComputedStyle is used to return object containing values of their CSS properties of player and 
-obstacle. The getPropertyValue identifies the CSS property and returns the value. This is to store their set px from CSS.
-If function states if left of obstacle is < 100px and > 50 px and player top is >= 240px, then game over. 
-*/
 
 // Game Over Function //
 
